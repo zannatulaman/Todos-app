@@ -18,7 +18,7 @@ const Today = ({ todos, setTodos }) => {
   return (
     <div className="TodosList p-4">
       <div className="text-center">
-        <h3>Today's List : </h3>
+        <h3>Today's List: </h3>
       </div>
 
       {

@@ -32,8 +32,8 @@ const Sidebar = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
-  // const [todos, setTodos] = useState([]);
   const [err, setErr] = useState("");
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,6 +57,9 @@ const Sidebar = () => {
     }
   };
   // console.log("Todos", todos);
+
+  
+
   return (
     <div className="sidebar">
       <div className="sidebar-box">
@@ -82,7 +85,10 @@ const Sidebar = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setAll("today");
+                
               }}
+              
+             
             >
               <CgToday></CgToday>Today
             </button>
@@ -92,7 +98,9 @@ const Sidebar = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setAll("Next7");
+               
               }}
+             
             >
               <CgCalendarNext></CgCalendarNext>Next 7 Days
             </button>

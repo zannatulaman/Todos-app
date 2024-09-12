@@ -8,14 +8,15 @@ import { useEffect } from "react";
 
 let dayName = ""
 
-const Todo = ({ todo , dayNameShow, random, }) => {
-    
+const Todo = ({ todo , dayNameShow, random, todayDate }) => {
     // console.log('Random', random);
+
+    console.log('Today', todayDate);
 
   const [check, setCheck] = useState(false);
   const [todos, setTodos] = useContext(ExampleContext);
   const [todoLength, setTodoLength] = useState([]);
-  
+  console.log('TodoLenth', todoLength);
   const handleEdit = () => {};
 
   const handleChecked = (id) => {
@@ -36,6 +37,14 @@ const Todo = ({ todo , dayNameShow, random, }) => {
   const handleDelete = (id) => {
     setTodos(todos?.filter((item) => item.id !== id));
   };
+
+  const handleLength = () => {
+    setTodoLength(todos.filter(tds => tds.dates === todayDate));
+}
+
+useEffect(() => {
+    handleLength();
+}, [todos]);
 
   const handleDayName = (day) => {
     if (day === '0') {
@@ -59,7 +68,7 @@ const Todo = ({ todo , dayNameShow, random, }) => {
         handleDayName(todo?.day);
     }, [todo?.day, todos])
 
-    console.log('Dayname', todo.day);
+    console.log('Dayname', dayName);
 
   return (
     <div className="todo">
