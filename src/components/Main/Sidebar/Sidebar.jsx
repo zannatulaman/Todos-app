@@ -25,10 +25,15 @@ import moment from "moment/moment";
 import { ExampleContext } from "../../../App";
 
 const Sidebar = () => {
-  const [todos, setTodos] = useContext(ExampleContext);
+  const [todos, setTodos,  showModal, setShowModal] = useContext(ExampleContext);
+
+  
+
+  // console.log('Showmodal', showModal);
+
   
   const [all, setAll] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
@@ -37,13 +42,14 @@ const Sidebar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Date', date);
     if (name && time) {
       setTodos([
         ...todos,
         {
           id: Math.round(Math.random() * 1000),
           names: name,
-          dates: moment(date).format("MMM Do YY"),
+          dates: moment(date).format("DD/MM/YYYY"),
           times: moment(time, "HH:mm:ss").format("hh:mm a"),
           day : moment(date).format("d"),
           checked: false
@@ -55,9 +61,11 @@ const Sidebar = () => {
     } else {
       setErr("Please provide name and time!");
     }
-  };
-  // console.log("Todos", todos);
 
+    // console.log("Todos", todos);
+
+  };
+  
   
 
   return (
@@ -65,7 +73,7 @@ const Sidebar = () => {
       <div className="sidebar-box">
         <div className="text-center">
           <p className="todosOf">
-            <FcTodoList></FcTodoList>Todos Of
+            <FcTodoList></FcTodoList>  Todos Of
           </p>
           <button
             className="add-btn p-2"
@@ -74,7 +82,7 @@ const Sidebar = () => {
               setShowModal(true);
             }}
           >
-            <IoMdAdd /> Make a Todo
+          <IoMdAdd />  Make a Todo
           </button>
         </div>
 
@@ -90,7 +98,7 @@ const Sidebar = () => {
               
              
             >
-              <CgToday></CgToday>Today
+              <CgToday></CgToday>  Today
             </button>
 
             <button
@@ -102,7 +110,7 @@ const Sidebar = () => {
               }}
              
             >
-              <CgCalendarNext></CgCalendarNext>Next 7 Days
+              <CgCalendarNext></CgCalendarNext>  Next 7 Days
             </button>
 
             <button
@@ -112,7 +120,7 @@ const Sidebar = () => {
                 setAll("ShowAll");
               }}
             >
-              <BsListUl></BsListUl>Show All
+              <BsListUl></BsListUl>  Show All
             </button>
 
             <button
@@ -122,15 +130,15 @@ const Sidebar = () => {
                 setAll("Status");
               }}
             >
-              <GrStatusInfo></GrStatusInfo>Status
+              <GrStatusInfo></GrStatusInfo> Status
             </button>
           </div>
 
           <div className="todoBox">
             {all === "today" && <Today todos ={todos} setTodos={setTodos}></Today>}
             {all === "Next7" && <NextSeven todos ={todos} setTodos={setTodos}></NextSeven>}
-            {all === "ShowAll" && <ShowAll todos ={todos} setTodos={setTodos}></ShowAll>}
-            {all === "Status" && <Status></Status>}
+            {all === "ShowAll" && <ShowAll todos ={todos} setTodos={setTodos} setAll={setAll} ></ShowAll>}
+            {all === "Status" && <Status todos ={todos} setAll={setAll} ></Status>}
           </div>
         </div>
 
@@ -158,6 +166,7 @@ const Sidebar = () => {
                   <span>Pick a Date</span>
                 </p>
                 <DatePicker
+                  // value={date}
                   selected={date}
                   onChange={(date) => setDate(date)}
                 />
@@ -189,11 +198,11 @@ const Sidebar = () => {
                 </div>
               )}
 
-              <div className="text-center mt-2">
+              <div className="text-center mt-4">
                 <input
                   type="submit"
                   value="Add Todo"
-                  className="add-btn "
+                  className="add-btn"
                 />
               </div>
 

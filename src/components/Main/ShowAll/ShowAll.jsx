@@ -1,16 +1,25 @@
 
+import { useContext, useState } from 'react';
 import Todo from '../../Todo/Todo'
+import { ExampleContext } from '../../../App';
 
 
-const ShowAll = ({todos, setTodos}) => {
-    // console.log('Props', todos);
+const ShowAll = ({}) => {
+
+    
+   const [todos, setTodos] = useContext(ExampleContext);
+        
+         console.log('Todos', todos);
+          
   return (
     <div className='TodosList p-4'>
               <div className='text-center'>
-                     <h3>Your Todos List <bold className='alltodosLength' >({todos.length})</bold></h3>
+                  <div>
+                  <h3>Your Todos List : <bold className='alltodosLength'>({todos.length})</bold></h3>
+                  </div>
 
                   {
-                    todos?.map((todo) => <Todo todo={todo} todos={todos} setTodos={setTodos}></Todo>)
+                    todos?.map((todo) => <Todo key= {todo.id} todo={todo} todos={todos} setTodos={setTodos}></Todo>)
                   }
               </div>
     </div>

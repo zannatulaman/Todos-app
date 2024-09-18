@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import moment from "moment/moment";
 import Todo from "../../Todo/Todo";
+import { ExampleContext } from "../../../App";
 
-const Today = ({ todos, setTodos }) => {
-  // console.log('Today', todos);
+const Today = ({}) => {
+  
+  const [todos, setTodos]= useContext(ExampleContext);
+  // console.log('Todoias', todos);
+ 
   let random = 0;
   const [todayTodo, setTodayTodo] = useState([]);
 
   const date = new Date();
-  const todayDate = moment(date).format("MMM Do YY");
+  const todayDate = moment(date).format("DD/MM/YYYY");
 
 
   useEffect(() => {
-    setTodayTodo(todos.filter((tds) => tds?.dates === todayDate));
+    setTodayTodo(todos?.filter(tds => tds.dates === todayDate))
   }, [todos]);
 
+  
   return (
     <div className="TodosList p-4">
       <div className="text-center">
@@ -22,7 +27,7 @@ const Today = ({ todos, setTodos }) => {
       </div>
 
       {
-        todayTodo.map((todo) => <Todo todo={todo} todayDate={todayDate} checked= {todo.checked} dayNameShow= {true} random={random++} key={todo.id}></Todo>)
+        todayTodo?.map(todo => <Todo todo={todo} todayDate={todayDate} checked= {todo.checked} dayNameShow= {true} random={random++} key={todo.id}></Todo>)
       }
     </div>
   );

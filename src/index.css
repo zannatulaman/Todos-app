@@ -61,6 +61,7 @@ body{
 
 .todosOf{
    font-size: 1.5rem;
+  
 }
 
 
@@ -217,7 +218,7 @@ body{
   right: 10px;
 }
 
-/* todo List */
+/* todo List  */
 
 .TodosList {
   background-color: var(--sidebar);
@@ -233,10 +234,11 @@ body{
 
 
 .todoItem {
-  display: flex;
+  display: flex; 
   justify-content: space-between;
   margin-left: 2rem;
-  margin-top: 15px;
+  margin-top: 15px; 
+
 }
 
 .tododetail {
@@ -257,7 +259,8 @@ body{
   outline: none;
   font-size: 1.5rem;
   /* background-color: royalblue; */
-}
+  color: var(--header) ;
+} 
 
 .doneIcon {
   fill: var(--header);

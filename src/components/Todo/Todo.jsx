@@ -1,91 +1,110 @@
 import React, { useContext, useState } from "react";
 import { AiFillDelete, AiOutlineFieldTime } from "react-icons/ai";
 import { FcCalendar, FcEditImage } from "react-icons/fc";
-import { MdDateRange, MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
+import {
+  MdDateRange,
+  MdRadioButtonChecked,
+  MdRadioButtonUnchecked,
+} from "react-icons/md";
 import { ExampleContext } from "../../App";
 import { useEffect } from "react";
+import EditModal from "../Main/Edit/editModal";
 
+let dayName = "";
 
-let dayName = ""
-
-const Todo = ({ todo , dayNameShow, random, todayDate }) => {
-    // console.log('Random', random);
-
-    console.log('Today', todayDate);
+const Todo = ({ todo, dayNameShow, random, todayDate }) => {
+  // console.log('Today', todayDate);
 
   const [check, setCheck] = useState(false);
-  const [todos, setTodos] = useContext(ExampleContext);
+  const [todos, setTodos, showModal, setShowModal] = useContext(ExampleContext);
   const [todoLength, setTodoLength] = useState([]);
-  console.log('TodoLenth', todoLength);
-  const handleEdit = () => {};
+  const [edit, setEdit] = useState(false);
+  const [editShowModal, setEditShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+
+
+  const handleEdit = (id) => {
+    setEdit(!edit);
+    setEditShowModal(true);
+    setSelectedId(id)
+  };
 
   const handleChecked = (id) => {
-       setCheck(!check);
+    setCheck(!check);
+    setTodos(
+      todos?.map((item) => {
+        if (item?.id === id) {
+          return { ...item, checked: !item.checked };
+        }
 
-       setTodos(todos?.map((item) => {
-              if(item?.id=== id){
-                return  {...item, checked: !item.checked}    
-            } 
+        return item;
+      })
+    );
+  };
 
-            return item
-       }))
-     
-    }
-  
-    // console.log('Todos', todos);
+  // console.log('Todos', todos);
+
+  console.log('Selected', selectedId);
 
   const handleDelete = (id) => {
     setTodos(todos?.filter((item) => item.id !== id));
   };
 
   const handleLength = () => {
-    setTodoLength(todos.filter(tds => tds.dates === todayDate));
-}
+    setTodoLength(todos?.filter((tds) => tds.dates === todayDate));
+  };
 
-useEffect(() => {
+  useEffect(() => {
     handleLength();
-}, [todos]);
+  }, [todos]);
 
   const handleDayName = (day) => {
-    if (day === '0') {
-        return dayName = 'Sunday';
-    } if (day === '1') {
-        return dayName = 'Monday';
-    } if (day === '2') {
-        return dayName = 'Tuesday';
-    } if (day === '3') {
-        return dayName = 'Wednesday';
-    } if (day === '4') {
-        return dayName = 'Thursday';
-    } if (day === '5') {
-        return dayName = 'Friday';
-    } if (day === '6') {
-        return dayName = 'Saturday';
+    if (day === "0") {
+      return (dayName = "Sunday");
     }
-  }
+    if (day === "1") {
+      return (dayName = "Monday");
+    }
+    if (day === "2") {
+      return (dayName = "Tuesday");
+    }
+    if (day === "3") {
+      return (dayName = "Wednesday");
+    }
+    if (day === "4") {
+      return (dayName = "Thursday");
+    }
+    if (day === "5") {
+      return (dayName = "Friday");
+    }
+    if (day === "6") {
+      return (dayName = "Saturday");
+    }
+  };
 
-    useEffect(() => {
-        handleDayName(todo?.day);
-    }, [todo?.day, todos])
+  useEffect(() => {
+    handleDayName(todo?.day);
+  }, [todo?.day, todos]);
 
-    console.log('Dayname', dayName);
+  // console.log('Dayname', dayName);
 
   return (
     <div className="todo">
-        {
-            dayNameShow && random === 0 &&
-            <div className="text-center">
-                   <h4 className="dayName"><FcCalendar></FcCalendar>{dayName} - <span>({todoLength.length})</span></h4> 
-            </div>
+      {dayNameShow && random === 0 && (
+        <div className="text-center">
+          <h4 className="dayName">
+            <FcCalendar></FcCalendar>
+            {dayName} - <span>({todoLength.length})</span>
+          </h4>
+        </div>
+      )}
 
-            // <div className="text-center">
-            //         <h4 className="dayName"><FcCalendar style={{ marginBottom: '2px', marginRight: '5px' }}></FcCalendar>{dayName} - <span>({todoLength.length})</span></h4>
-            // </div>
-            
-        }
       <div className="todoItem">
         <div>
-          <p className="todoNames">{todo.names}</p>
+          <p className={`todoNames ${check === true ? "checked" : ""}`}>
+            {todo.names}
+          </p>
         </div>
 
         <div>
@@ -120,18 +139,36 @@ useEffect(() => {
             title="Edit"
             className="iconBtn"
           >
-            <AiFillDelete className="todoIcons" style={{color: "red"}}></AiFillDelete>
+            <AiFillDelete
+              className="todoIcons"
+              style={{ color: "red" }}
+            ></AiFillDelete>
           </button>
         </div>
       </div>
+
       <div className="tododetail">
-                <div className="todoTimes">
-                    <p><MdDateRange></MdDateRange>{todo.dates}</p>
-                </div>
-                <div className="todoTimes">
-                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times === 'Invalid date' ? 'Invalid Time' : todo.times}</p>
-                </div>
-            </div>
+        <div className="todoTimes">
+          <p>
+            <MdDateRange></MdDateRange>
+            {todo.dates}
+          </p>
+        </div>
+        <div className="todoTimes">
+          <p>
+            <AiOutlineFieldTime></AiOutlineFieldTime>
+            {todo.times === "Invalid date" ? "Invalid Time" : todo.times}
+          </p>
+        </div>
+      </div>
+      {
+                edit && editShowModal &&
+                <EditModal edit={edit} editShowModal={editShowModal} selectedId={selectedId} setSelectedId={setSelectedId} setEditShowModal={setEditShowModal}>
+                   
+                </EditModal>
+      }
+           
+       
     </div>
   );
 };

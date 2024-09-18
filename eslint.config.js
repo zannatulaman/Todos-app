@@ -33,6 +33,7 @@ export default [
       'react/prop-types': 'off',
       'react/jsx-key': 'off',
       'react/jsx-no-duplicate-props': 'off',
+      'react-hooks/rules-of-hooks': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
