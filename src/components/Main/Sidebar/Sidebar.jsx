@@ -49,7 +49,7 @@ const Sidebar = () => {
         {
           id: Math.round(Math.random() * 1000),
           names: name,
-          dates: moment(date).format("DD/MM/YYYY"),
+          dates: moment(date).format("YYYY-MM-DD"),
           times: moment(time, "HH:mm:ss").format("hh:mm a"),
           day : moment(date).format("d"),
           checked: false

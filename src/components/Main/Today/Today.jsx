@@ -12,11 +12,11 @@ const Today = ({}) => {
   const [todayTodo, setTodayTodo] = useState([]);
 
   const date = new Date();
-  const todayDate = moment(date).format("DD/MM/YYYY");
+  const todayDate = moment(date).format("YYYY-MM-DD");
 
 
   useEffect(() => {
-    setTodayTodo(todos?.filter(tds => tds.dates === todayDate))
+    setTodayTodo(todos?.filter(tds => moment(tds.dates).isSame(moment(), "date")))
   }, [todos]);
 
   

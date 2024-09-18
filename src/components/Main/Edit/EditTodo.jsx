@@ -19,33 +19,52 @@ const EditTodo = ({todo, editShowModal, selectedId, setSelectedId, setEditShowMo
     
      const handleName = (e) => {
         setName(e.target.value);
-        
+        todo.names = e.target.value;
      }
 
 
      const handleDate  = (date) => {
         setDate(date);
+        todo.dates = moment(date).format("YYYY-MM-DD");
      }
 
      const handleTime = (time) => {
         setTime(time);
-        
+        todo.times = (moment(time, "HH:mm:ss").format('hh:mm a'));
      }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setTodos([...todos], {
-            id: todo.id,
-            names: todo.names,
-            dates: moment(todo.dates).format("DD/MM/YYYY"),
-            times: moment(todo.times, "HH:mm:ss").format('hh:mm a'),
-            day: todo.day,
-            checked: todo.checked
+    //     setTodos([...todos], {
+    //         id: todo.id,
+    //         names: todo.names,
+    //         dates: moment(todo.dates).format("YYYY-MM-DD"),
+    //         times: moment(todo.times, "HH:mm:ss").format('hh:mm a'),
+    //         day: todo.day,
+    //         checked: todo.checked
+    // })
+    const  updatedTodos = todos.map((item) => {
+          if(item.id=== todo.id){
+             return  {
+                        id: todo.id,
+                        names: todo.names,
+                        dates: moment(todo.dates).format("YYYY-MM-DD"),
+                        times: moment(todo.times, "HH:mm:ss").format('hh:mm a'),
+                        day: todo.day,
+                        checked: todo.checked
+             }
+
+          }else{
+             return item
+          }
     })
+    console.log('Updated', updatedTodos);
+    console.log(name, date, time);
+    setTodos(updatedTodos);
     setEditShowModal(false);
     setSelectedId(null);
-        
+      
     }
 
     console.log('Todo', todo);
