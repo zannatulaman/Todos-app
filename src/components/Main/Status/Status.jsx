@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShowAll from "../ShowAll/ShowAll";
 import Completed from "../Completed/Completed";
-import Uncompleted from "../Uncompleted/Uncompleted";
+import Incompleted from "../Incompleted/Incompleted";
 
 const Status = ({ todos, setTodos, all, setAll }) => {
   const [optionTodos, setOptionTodos] = useState("");
@@ -16,7 +16,7 @@ const Status = ({ todos, setTodos, all, setAll }) => {
      setOptionTodos("completed");
     }
     if (e.target.value === "uncompleted") {
-      setOptionTodos("uncompleted");
+      setOptionTodos("Incompleted");
     }
   };
 
@@ -31,7 +31,7 @@ const Status = ({ todos, setTodos, all, setAll }) => {
           <option selected>Please choose an option</option>
           <option value="alls">All</option>
           <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
+          <option value="Incompleted">Incompleted</option>
         </select>
       </div>
 
@@ -45,7 +45,7 @@ const Status = ({ todos, setTodos, all, setAll }) => {
             }
 
             {
-             optionTodos ===  "uncompleted" && <Uncompleted todos ={todos} setTodos={setTodos}></Uncompleted>
+             optionTodos ===  "Incompleted" && <Incompleted todos ={todos} setTodos={setTodos}></Incompleted>
             }
         </div>
         

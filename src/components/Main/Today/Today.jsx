@@ -3,7 +3,7 @@ import moment from "moment/moment";
 import Todo from "../../Todo/Todo";
 import { ExampleContext } from "../../../App";
 
-const Today = ({}) => {
+const Today = () => {
   
   const [todos, setTodos]= useContext(ExampleContext);
   // console.log('Todoias', todos);

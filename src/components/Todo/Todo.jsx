@@ -45,7 +45,7 @@ const Todo = ({ todo, dayNameShow, random, todayDate }) => {
 
   // console.log('Todos', todos);
 
-  console.log('Selected', selectedId);
+  // console.log('Selected', selectedId);
 
   const handleDelete = (id) => {
     setTodos(todos?.filter((item) => item.id !== id));

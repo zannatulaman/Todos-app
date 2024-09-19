@@ -4,7 +4,7 @@ import Todo from '../../Todo/Todo'
 import { ExampleContext } from '../../../App';
 
 
-const ShowAll = ({}) => {
+const ShowAll = () => {
 
     
    const [todos, setTodos] = useContext(ExampleContext);
