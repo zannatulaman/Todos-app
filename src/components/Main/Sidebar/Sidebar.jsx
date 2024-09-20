@@ -21,6 +21,7 @@ import "react-clock/dist/Clock.css";
 // date picker components
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 import moment from "moment/moment";
 import { ExampleContext } from "../../../App";
 
@@ -38,6 +39,8 @@ const Sidebar = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
   const [err, setErr] = useState("");
+
+  // console.log(all);
   
 
   const handleSubmit = (e) => {
@@ -62,11 +65,11 @@ const Sidebar = () => {
       setErr("Please provide name and time!");
     }
 
-    // console.log("Todos", todos);
-
+    
   };
   
-  
+  console.log("Todos", todos);
+
 
   return (
     <div className="sidebar">

@@ -20,17 +20,25 @@ const NextSeven = ({}) => {
         number: day, // use day instead of days array
       };
     });
+     
+    console.log("Sorted", sortedTodosByDay);
 
     const today = parseInt(moment().format("d"));
 
+    console.log('Today', today);
+
     const arrangeDays = sortedTodosByDay.slice(today);
+    console.log('Arrange', arrangeDays);
+
     const reArrangeDays = sortedTodosByDay.slice(0, today);
+
+    console.log('Rearrange', reArrangeDays);
 
     const concatArray = arrangeDays.concat(reArrangeDays);
     setWeekTodos(concatArray);
   }, [todos]);
 
-  
+ 
 
   return (
     <div className="TodosList p-4">

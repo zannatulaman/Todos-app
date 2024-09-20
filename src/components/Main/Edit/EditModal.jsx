@@ -21,6 +21,8 @@ const EditModal = ({edit, editShowModal, selectedId, setSelectedId, setEditShowM
 
      }, [todos, selectedId])
 
+     console.log('Select', selectedId);
+
     console.log('Edit', editTodos);
   return (
     <div>

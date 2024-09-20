@@ -9,7 +9,7 @@ const ShowAll = () => {
     
    const [todos, setTodos] = useContext(ExampleContext);
         
-         console.log('Todos', todos);
+         console.log('Todos', todos.length);
           
   return (
     <div className='TodosList p-4'>

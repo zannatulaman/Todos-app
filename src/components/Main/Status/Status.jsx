@@ -15,7 +15,7 @@ const Status = ({ todos, setTodos, all, setAll }) => {
     if (e.target.value === "completed") {
      setOptionTodos("completed");
     }
-    if (e.target.value === "uncompleted") {
+    if (e.target.value === "Incompleted") {
       setOptionTodos("Incompleted");
     }
   };
